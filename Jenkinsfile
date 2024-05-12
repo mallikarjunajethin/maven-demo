@@ -56,7 +56,8 @@ pipeline {
                     git add Deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 		    git remote -v
-                    git push https://github.com/mallikarjunajethin/deploymnet-test.git HEAD:main 
+                    git remote set-url origin https://{usernameVariable}:{passwordVariable}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
+                    git remote add origin https://{usernameVariable}:{passwordVariable}@github.com/mallikarjunajethin/deploymnet-test.git HEAD:main 
 		    '''
 		 }
 	   }
