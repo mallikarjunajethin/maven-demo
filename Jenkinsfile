@@ -46,7 +46,7 @@ pipeline {
         environment {
             GIT_REPO_NAME = "deploymnet-test"
             GIT_USER_NAME = "mallikarjunajethin"
-	    def buildNumber = env.BUILD_NUMBER
+	    buildNumber = env.BUILD_NUMBER
         }
         steps {
                withCredentials([string(credentialsId: 'git-hub-login', variable: 'GITHUB_TOKEN')]) {
