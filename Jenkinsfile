@@ -16,14 +16,14 @@ pipeline {
     stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("mallikarjunajethin/maven-demo1:${BUILD_NUMBER}")
+                    docker.build("mallikarjunajethin/maven-demo:${BUILD_NUMBER}")
                 }
             }
     }
 
     stage('Build and Push Docker Image') {
       environment {
-        DOCKER_IMAGE = "mallikarjunajethin/maven-demo1:${BUILD_NUMBER}"
+        DOCKER_IMAGE = "mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('docker-hub-cred')
       }
       steps {
