@@ -58,7 +58,7 @@ pipeline {
                     git add Deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 		    git remote -v
-                    git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main 
+                    git push https://github.com/mallikarjunajethin/deploymnet-test.git HEAD:main 
 		    '''
 		 }
 	   }
