@@ -46,22 +46,20 @@ pipeline {
         environment {
             GIT_REPO_NAME = "deploymnet-test"
             GIT_USER_NAME = "mallikarjunajethin"
+	    def buildNumber = env.BUILD_NUMBER
         }
         steps {
-               git credentialsId: 'git-hub-login', url: https://github.com/
-		       }
-		//withCredentials([string(credentialsId: 'git-hub-login', variable: 'GITHUB_TOKEN')]) {
-                //sh '''
-                //    git config user.email "mallikarjuna.jethin@gmail.com"
-                //    git config user.name "mallikarjunajethin"
-                //    def buildNumber = env.BUILD_NUMBER
-                //    sed -i 's/BUILD_NUMBER/${buildNumber}/g' deploymnet-test/deployment.yml
-                //    git add deploymnet-test/deployment.yml
-                //    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                //    //git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main 
-		//'''	
-		//      }
+               withCredentials([string(credentialsId: 'git-hub-login', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "mallikarjuna.jethin@gmail.com"
+                    git config user.name "mallikarjunajethin"
+                    sed -i 's/BUILD_NUMBER/${buildNumber}/g' deploymnet-test/deployment.yml
+                    git add deploymnet-test/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main 
+		 '''	
+		      }
 	   }
-//	}
+	}
  }
 }
