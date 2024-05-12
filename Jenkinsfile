@@ -51,13 +51,15 @@ pipeline {
             script{
                 withCredentials([usernamePassword(credentialsId: 'cf6f7bba-381b-4d28-a987-a63a0f09467e', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
+                    git config user.email "mallikarjuna.jethin@gmail.com"
+                    git config user.name "mallikarjunajethin"
+		    
 		    BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Deployment.yml
                     git add Deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 		    git remote -v
-                    git remote set-url origin https://{usernameVariable}:{passwordVariable}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
-                    git remote add origin https://{usernameVariable}:{passwordVariable}@github.com/mallikarjunajethin/deploymnet-test.git HEAD:main 
+                    git push https://git@github.com/mallikarjunajethin/deploymnet-test.git HEAD:main
 		    '''
 		 }
 	   }
