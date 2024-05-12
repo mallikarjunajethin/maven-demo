@@ -38,15 +38,12 @@ pipeline {
  //       }
     stage('Checkout') {
        steps {
-        sh 'echo passed'
-        git branch: 'development', url: 'https://github.com/mallikarjunajethin/deploymnet-test.git'
+        	git credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', 
+                url: 'https://github.com/mallikarjunajethin/deploymnet-test.git',
+                branch: 'main'
       }
     }
     stage('Update Deployment File') {
-        environment {
-            GIT_REPO_NAME = "deploymnet-test"
-            GIT_USER_NAME = "mallikarjunajethin"
-        }
 	steps {
             script{
                 withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -59,7 +56,7 @@ pipeline {
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 		    git remote -v
                     git remote set-url origin https://github.com/mallikarjunajethin/deploymnet-test.git
-                    git push https://github.com/mallikarjunajethin/deploymnet-test.git
+                    git push https://github.com/mallikarjunajethin/deploymnet-test.git HEAD:main
 		    '''
 		 }
 	   }
