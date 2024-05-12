@@ -21,21 +21,6 @@ pipeline {
             }
     }
 
-    stage('Push Docker Image') {
-		environment {
-        DOCKER_REGISTRY_CREDENTIALS = credentials('docker-hub-cred')
-        DOCKER_IMAGE_NAME = 'mallikarjunajethin/maven-demo'
-        DOCKER_IMAGE_TAG = 'latest'
-            }
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        docker.withRegistry('https://hub.docker.com/repositories/mallikarjunajethin', 'docker-hub-cred') {
-                            docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}").push()
-                        }
-                    }
-                }
-            }
-        }
+    
     }
 }
