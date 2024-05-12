@@ -46,14 +46,14 @@ pipeline {
         environment {
             GIT_REPO_NAME = "deploymnet-test"
             GIT_USER_NAME = "mallikarjunajethin"
-	    buildNumber = env.BUILD_NUMBER
         }
         steps {
                withCredentials([string(credentialsId: 'git-hub-login', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"
-                    sed -i 's/BUILD_NUMBER/${buildNumber}/g' deploymnet-test/deployment.yml
+		    BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" deploymnet-test/deployment.yml
                     git add deploymnet-test/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main 
