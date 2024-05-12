@@ -48,7 +48,7 @@ pipeline {
             GIT_USER_NAME = "mallikarjunajethin"
         }
         steps {
-            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+            withCredentials([string(credentialsId: 'git-hub-login', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"
@@ -56,10 +56,10 @@ pipeline {
                     sh "sed -i 's/BUILD_NUMBER/${buildNumber}/g' deploymnet-test/deployment.yml
                     git add deploymnet-test/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main '''
-								
-			    }
-			}
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main 
+		'''	
+		      }
+		   }
 		}
  }
 }
