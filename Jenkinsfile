@@ -25,7 +25,7 @@ pipeline {
             steps {
                 // Push Docker image to a registry
                 script {
-                    docker.withRegistry('https://hub.docker.com/', 'docker-hub-cred') {
+                    docker.withRegistry('https://docker.io', 'docker-hub-cred') {
                         docker.image('mallikarjunajethin/maven-demo:${BUILD_NUMBER}').push()
                     }
                 }  
