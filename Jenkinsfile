@@ -49,7 +49,7 @@ pipeline {
         }
 	steps {
             script{
-                withCredentials([usernamePassword(credentialsId: 'cf6f7bba-381b-4d28-a987-a63a0f09467e', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"
