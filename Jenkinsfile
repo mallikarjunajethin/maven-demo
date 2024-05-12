@@ -48,11 +48,9 @@ pipeline {
             GIT_USER_NAME = "mallikarjunajethin"
         }
 	steps {
-                script{
-                    withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-        //steps {
-        //       withCredentials([string(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', variable: 'GITHUB_TOKEN')]) {
-                sh '''
+            script{
+                withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"
 		    BUILD_NUMBER=${BUILD_NUMBER}
@@ -64,5 +62,6 @@ pipeline {
 		 }
 	   }
 	}
- }
+      }
+   }
 }
