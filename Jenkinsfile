@@ -21,19 +21,20 @@ pipeline {
             }
     }
 
-    stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_IMAGE = "mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-hub-cred')
-      }
-      steps {
-        script {
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
-            docker.withRegistry('https://docker.io', "docker-hub-cred") {
-                dockerImage.push()
+
+    stage('push') {
+            steps {
+                // Log in to Docker Hub
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                }
+                
+                // Push Docker image to Docker Hub
+                sh "docker push mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
+                
+                // Log out from Docker Hub
+                sh "docker logout"
             }
         }
-      }
-    }
  }
 }
