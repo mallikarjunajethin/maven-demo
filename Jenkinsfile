@@ -21,15 +21,19 @@ pipeline {
             }
     }
 
-    stage('Deploy') {
-            steps {
-                // Push Docker image to a registry
-                script {
-                    docker.withRegistry('https://docker.io', 'docker-hub-cred') {
-                        docker.image('mallikarjunajethin/maven-demo:${BUILD_NUMBER}').push()
-                    }
-                }  
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
+        REGISTRY_CREDENTIALS = credentials('docker-hub-cred')
+      }
+      steps {
+        script {
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1', "docker-hub-cred") {
+                dockerImage.push()
             }
-       }
+        }
+      }
     }
+ }
 }
