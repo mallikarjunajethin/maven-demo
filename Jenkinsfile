@@ -58,7 +58,7 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Deployment.yml
                     git add Deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push origin https://${usernameVariable}:${passwordVariable}github.com/mallikarjunajethin/deploymnet-test.git HEAD:main
+                    git push origin https://${usernameVariable}:${passwordVariable}@github.com/mallikarjunajethin/deploymnet-test.git HEAD:main
 		    '''
 		 }
 	   }
