@@ -57,6 +57,7 @@ pipeline {
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" Deployment.yml
                     git add Deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+		    git remote -v
                     git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main 
 		    '''
 		 }
