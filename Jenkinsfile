@@ -47,8 +47,11 @@ pipeline {
             GIT_REPO_NAME = "deploymnet-test"
             GIT_USER_NAME = "mallikarjunajethin"
         }
-        steps {
-               withCredentials([string(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', variable: 'GITHUB_TOKEN')]) {
+	steps {
+                script{
+                    withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        //steps {
+        //       withCredentials([string(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"
@@ -57,8 +60,8 @@ pipeline {
                     git add deploymnet-test/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                     git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main 
-		 '''	
-		      }
+		    '''
+		 }
 	   }
 	}
  }
