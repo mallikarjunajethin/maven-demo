@@ -36,7 +36,7 @@ pipeline {
                 sh "docker logout"
             }
         }
-    stage('Checkout') {
+    stage('datacopy') {
        steps {
         	git credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', 
                 url: 'https://github.com/mallikarjunajethin/deploymnet-test.git',
