@@ -9,7 +9,8 @@ pipeline {
                     sh "git clone -b development https://github.com/mallikarjunajethin/deploymnet-test.git"
                 }
                 // Download the deploy file (e.g., Deployment.yml)
-                sh 'cp Deployment.yml Deployment.yml.backup' // Backup the original file
+                sh 'cd deploymnet-test'
+		sh 'cp Deployment.yml Deployment.yml.backup' // Backup the original file
                 // Use any suitable command to download the file, e.g., wget or curl
             }
         }
@@ -17,7 +18,7 @@ pipeline {
         stage('Modify Build Number') {
             steps {
                 // Modify the build number in the deploy file
-				sh "BUILD_NUMBER=${BUILD_NUMBER}"
+		sh "BUILD_NUMBER=${BUILD_NUMBER}"
                 sh "sed -i 's/replaceImageTag/${BUILD_NUMBER}/g' Deployment.yml"
             }
         }
