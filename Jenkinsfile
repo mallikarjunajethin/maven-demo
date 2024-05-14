@@ -33,9 +33,9 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
 
-		    sh "git config --global credential.helper 'store --file=.git-credentials'"
-                    sh "git add ."
-                    sh "git commit -m 'Update build number for deployment'"
+		    sh "git config --global credential.helper store" // Optional: Store credentials locally
+                    sh "git config --global user.email 'mallikarjuna.jethin@gmail.com'"
+                    sh "git config --global user.name 'mallikarjunajethin'"
                     sh "git push origin main"
                 }
             }
