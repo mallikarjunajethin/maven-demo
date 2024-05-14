@@ -30,17 +30,17 @@ pipeline {
         }
 
         stage('Commit and Push to Main') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-
+      	      environment {
+        	    GITHUB_TOKEN = credentials('5c3b71b1-b26d-4069-8a82-bc7abf78161d')
+      		}
+		steps {
+            	   script {
 		    sh "git config --global credential.helper store" // Optional: Store credentials locally
                     sh "git config --global user.email 'mallikarjuna.jethin@gmail.com'"
                     sh "git config --global user.name 'mallikarjunajethin'"
-                    sh "git push origin main"
+                    sh "git push https://$GITHUB_TOKEN@github.com/mallikarjunajethin/deploymnet-test.git main"
                 }
             }
-        }
-
-     
+    }   
     }
 }
