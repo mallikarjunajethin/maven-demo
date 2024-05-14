@@ -6,7 +6,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh "git config --global credential.helper 'store --file=.git-credentials'"
-                    sh "git clone -b development https://${USERNAME}:${PASSWORD}@github.com/mallikarjunajethin/deploymnet-test.git"
+                    sh "git clone -b development https://github.com/mallikarjunajethin/deploymnet-test.git"
                 }
                 // Download the deploy file (e.g., Deployment.yml)
                 sh 'cp Deployment.yml Deployment.yml.backup' // Backup the original file
