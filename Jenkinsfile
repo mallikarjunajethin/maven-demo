@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    cleanWs()
     stages {
 	    stage('Download Deploy File') {
             steps {
