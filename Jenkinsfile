@@ -2,7 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Download Deploy File') {
+            stage('cleanup')
+	    {
+		    cleanWs()
+	    }
+	    stage('Download Deploy File') {
             steps {
                 withCredentials([usernamePassword(credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh "git config --global credential.helper 'store --file=.git-credentials'"
