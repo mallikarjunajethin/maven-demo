@@ -1,16 +1,7 @@
-package com.mycompany.app;
+package com.example;
 
-public class App {
-
-    private static final String MESSAGE = "Hello World!";
-
-    public App() {}
-
+public class Main {
     public static void main(String[] args) {
-        System.out.println(MESSAGE);
-    }
-
-    public String getMessage() {
-        return MESSAGE;
+        System.out.println("Hello, world!");
     }
 }
