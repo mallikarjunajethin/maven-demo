@@ -1,44 +1,44 @@
 pipeline {
   agent any
   stages {
-//    stage('Checkout') {
-//       steps {
-//        sh 'echo passed'
-//        git branch: 'main', url: 'https://github.com/mallikarjunajethin/maven-demo.git'
-//      }
-//    }
-//    stage('Build Maven Project') {
-//        steps {
-//                sh 'mvn clean package'
-//            }
-//    }
-
-//    stage('Build Docker Image') {
-//            steps {
-//                script {
-//                    docker.build("mallikarjunajethin/maven-demo:${BUILD_NUMBER}")
-//                }
-//            }
-//    }
-
-
-//    stage('push') {
-//            steps {
-//                // Log in to Docker Hub
-//                withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-//                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
-//                }
-                
-                // Push Docker image to Docker Hub
-//                sh "docker push mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
-                
- //               // Log out from Docker Hub
- //               sh "docker logout"
- //           }
- //       }
     stage('Checkout') {
        steps {
-        	git credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', 
+        sh 'echo passed'
+        git branch: 'main', url: 'https://github.com/mallikarjunajethin/maven-demo.git'
+      }
+    }
+    stage('Build Maven Project') {
+        steps {
+                sh 'mvn clean package'
+            }
+    }
+
+    stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build("mallikarjunajethin/maven-demo:${BUILD_NUMBER}")
+                }
+            }
+    }
+
+
+    stage('push') {
+            steps {
+                // Log in to Docker Hub
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-cred', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                }
+                
+                // Push Docker image to Docker Hub
+                sh "docker push mallikarjunajethin/maven-demo:${BUILD_NUMBER}"
+                
+                // Log out from Docker Hub
+                sh "docker logout"
+            }
+        }
+    stage('Checkout') {
+       steps {
+        	git credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', 
                 url: 'https://github.com/mallikarjunajethin/deploymnet-test.git',
                 branch: 'main'
       }
@@ -46,7 +46,7 @@ pipeline {
     stage('Update Deployment File') {
 	steps {
             script{
-                withCredentials([usernamePassword(credentialsId: '8e09c043-d9c7-4af0-80ee-a3bd57ece9b0', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: '5c3b71b1-b26d-4069-8a82-bc7abf78161d', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
                     git config user.email "mallikarjuna.jethin@gmail.com"
                     git config user.name "mallikarjunajethin"    
