@@ -38,7 +38,7 @@ pipeline {
 		    sh "git config --global credential.helper store"
                     sh "git config --global user.email 'mallikarjuna.jethin@gmail.com'"
                     sh "git config --global user.name 'mallikarjunajethin'"
-                    sh "git push https://${GITHUB_TOKEN}@github.com/mallikarjunajethin/deploymnet-test.git main"
+                    sh "git push https://github.com/mallikarjunajethin/deploymnet-test.git main"
                 }
             }
     }   
