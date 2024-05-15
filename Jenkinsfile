@@ -39,7 +39,7 @@ pipeline {
                     sh "git config --global user.email 'mallikarjuna.jethin@gmail.com'"
                     sh "git config --global user.name 'mallikarjunajethin'"
 		    sh "git add"
-		    sh "git commit -a ."
+		    sh "git commit -a 'abc'"
                     sh "git branch -M main"
 		    sh "git push -u origin main"
                 }
