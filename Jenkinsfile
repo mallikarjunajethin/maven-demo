@@ -38,7 +38,7 @@ pipeline {
 		    sh "git config --global credential.helper store"
                     sh "git config --global user.email 'mallikarjuna.jethin@gmail.com'"
                     sh "git config --global user.name 'mallikarjunajethin'"
-		    sh "git commit -m 'first commit'"
+		    sh "git commit -a ."
                     sh "git branch -M main"
 		    sh "git push -u origin main"
                 }
