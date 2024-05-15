@@ -31,7 +31,7 @@ pipeline {
 
         stage('Commit and Push to Main') {
       	      environment {
-        	    GITHUB_TOKEN = credentials('5c3b71b1-b26d-4069-8a82-bc7abf78161d')
+        	    GITHUB_TOKEN = credentials('2d40bd33-5c82-4cec-ac42-345d911384cb')
       		}
 		steps {
             	   script {
