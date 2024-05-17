@@ -1,21 +1,13 @@
-# Use official maven/Java image to create a build environment.
-FROM maven:3.6.3-jdk-8 AS build
+# You can change this base image to anything else
+# But make sure to use the correct version of Java
+FROM adoptopenjdk/openjdk11:alpine-jre
 
-# Copy source code to the container.
-COPY ./src /usr/src/app/src
-COPY pom.xml /usr/src/app
+# Simply the artifact path
+ARG artifact=target/spring-boot-web.jar
 
-# Set the working directory.
-WORKDIR /usr/src/app
+WORKDIR /opt/app
 
-# Package the application.
-RUN mvn package
+COPY ${artifact} app.jar
 
-# Create a minimal Java runtime image.
-FROM openjdk:8-jre-alpine
-
-# Copy the JAR file from the build stage to the runtime image.
-COPY --from=build /usr/src/app/target/maven-demo-1.0-SNAPSHOT.jar /usr/app/maven-demo-1.0-SNAPSHOT.jar
-
-# Set the entry point to the application.
-ENTRYPOINT ["java", "-jar", "/usr/app/maven-demo-1.0-SNAPSHOT.jar"]
+# This should not be changed
+ENTRYPOINT ["java","-jar","app.jar"]
