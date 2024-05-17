@@ -4,7 +4,7 @@ pipeline {
     stage('Checkout') {
        steps {
         sh 'echo passed'
-        git branch: 'main', url: 'https://github.com/mallikarjunajethin/maven-demo-one.git'
+        git branch: 'main', url: 'https://github.com/mallikarjunajethin/maven-demo.git'
       }
     }
     stage('Static Code Analysis') {
