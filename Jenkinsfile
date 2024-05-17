@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     //docker.build("maven-demo-docker:${BUILD_NUMBER}")
-			sh "docker build -t maven-demo-docker:${BUILD_NUMBER}"
+			sh "docker build -t maven-demo-docker:${BUILD_NUMBER} ."
                 }
             }
     }
